@@ -1,7 +1,9 @@
+import { Button } from '@mui/material';
 import React, { useState } from 'react';
+import TextField from '@mui/material/TextField';
 
-// Definir el tipo de datos para los campos del formulario
-interface FormData {
+
+interface Data {
   nombre: string;
   apellido: string;
   rut: string;
@@ -10,95 +12,93 @@ interface FormData {
 }
 
 const App: React.FC = () => {
-  // Estado inicial para el formulario
-  const [formData, setFormData] = useState<FormData>({
+ 
+  const iniciopagina: Data = {
     nombre: '',
     apellido: '',
     rut: '',
     correo: '',
-    comentario: ''
-  });
+    comentario: '',
+  };
 
-  // Función para manejar el cambio de los inputs
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const [Data, setFormData] = useState<Data>(iniciopagina);
+
+  
+  const datawea = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  // Función para manejar el envío del formulario
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
-    console.log('Datos del formulario:', formData);
+ 
+  const completo = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Datos del formulario:', Data);
+
+    setFormData(iniciopagina);
+    
   };
 
   return (
     <div className="container">
-      <h1>Formulario generico</h1>
-      <form onSubmit={handleSubmit}>
+      <h1>Formulario genérico</h1>
+      <form onSubmit={completo}>
         <div>
-          <label htmlFor="nombre">Nombre</label>
-          <input
+        <TextField id="outlined-basic" label="nombre" variant="outlined" 
             type="text"
-            id="nombre"
             name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
+            value={Data.nombre}
+            onChange={datawea}
             required
           />
         </div>
 
         <div>
-          <label htmlFor="apellido">Apellido</label>
-          <input
+        <TextField id="outlined-basic" label="apellido" variant="outlined" 
             type="text"
-            id="apellido"
             name="apellido"
-            value={formData.apellido}
-            onChange={handleChange}
+            value={Data.apellido}
+            onChange={datawea}
             required
           />
         </div>
 
         <div>
-          <label htmlFor="rut">RUT</label>
-          <input
+        <TextField id="outlined-basic" label="rut" variant="outlined" 
             type="text"
-            id="rut"
             name="rut"
-            value={formData.rut}
-            onChange={handleChange}
+            value={Data.rut}
+            onChange={datawea}
             required
           />
         </div>
 
         <div>
-          <label htmlFor="correo">Correo electrónico</label>
-          <input
+          <TextField id="outlined-basic" label="correo electronico" variant="outlined" 
             type="email"
-            id="correo"
             name="correo"
-            value={formData.correo}
-            onChange={handleChange}
+            value={Data.correo}
+            onChange={datawea}
             required
           />
         </div>
 
         <div>
           <label htmlFor="comentario">Comentario</label>
-          <textarea
-            id="comentario"
+          <textarea id="comentario"
             name="comentario"
-            value={formData.comentario}
-            onChange={handleChange}
+            value={Data.comentario}
+            onChange={datawea}
             required
           ></textarea>
         </div>
 
         <div>
-          <button type="submit">Guardar</button>
+          <Button type="submit" variant="contained">Guardar</Button>  
+        
+        
         </div>
       </form>
     </div>
