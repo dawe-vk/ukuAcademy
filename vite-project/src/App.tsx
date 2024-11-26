@@ -11,21 +11,19 @@ interface Data {
   comentario: string;
 }
 
-const App: React.FC = () => {
- 
-  const iniciopagina: Data = {
-    nombre: '',
-    apellido: '',
-    rut: '',
-    correo: '',
-    comentario: '',
-  };
+const Formulariowea: React.FC = () => {
 
-  const [Data, setFormData] = useState<Data>(iniciopagina);
-
+  const [Data, setFormData] = useState<Data>({
+ nombre: "",
+    apellido: "",
+    rut: "",
+    correo: "",
+    comentario: ""
+  });
+   
   
-  const datawea = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+  const datawea = (eventou: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = eventou.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -35,9 +33,9 @@ const App: React.FC = () => {
  
   const completo = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Datos del formulario:', Data);
+    console.log('Datos del kongpare', Data);
 
-    setFormData(iniciopagina);
+    setFormData(Data);
     
   };
 
@@ -96,11 +94,22 @@ const App: React.FC = () => {
         </div>
 
         <div>
-          <Button type="submit" variant="contained">Guardar</Button>  
+           <Button type="submit" variant="contained">Guardar</Button> 
         
         
         </div>
       </form>
+    </div>
+  );
+};
+
+
+
+const App: React.FC = () => {
+  return (
+    <div style={{ fontFamily: "Arial, sans-serif", textAlign: "center", padding: "20px" }}>
+      <h1>Formulario con Componentes</h1>
+      <Formulariowea />
     </div>
   );
 };
